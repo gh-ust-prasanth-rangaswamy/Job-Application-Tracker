@@ -1,6 +1,6 @@
 import { deleteApplication, updateApplication } from "../services/applicationService";
 
-function ApplicationItem({ application, refresh }) {
+function ApplicationItem({ application, refresh, onEdit}) {
 
     const handleStatusChange = async (e) => {
         const updated = { ...application, status: e.target.value };
@@ -39,11 +39,24 @@ function ApplicationItem({ application, refresh }) {
                     <option value="Rejected">Rejected</option>
                 </select>
             </td>
-            <td>
-                <button className="btn btn-sm btn-danger" onClick={handleDelete}>
-                    Delete
-                </button>
+            <td className="text-center" style={{ width: "140px" }}>
+                <div className="d-flex justify-content-center gap-2">
+                    <button
+                        className="btn btn-warning btn-sm"
+                        onClick={() => onEdit(application)}
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => handleDelete(application.id)}
+                    >
+                        Delete
+                    </button>
+                </div>
             </td>
+
         </tr>
     );
 }

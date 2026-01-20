@@ -4,6 +4,7 @@ import ApplicationList from "./components/ApplicationList";
 import { getApplications } from "./services/applicationService";
 import { getPaginatedApplications } from "./services/applicationService";
 import { getStatistics } from "./services/applicationService";
+import EditApplicationModal from "./components/EditApplicationModal";
 
 function App() {
     const [applications, setApplications] = useState([]);
@@ -12,15 +13,18 @@ function App() {
     const [page, setPage] = useState(0);
     const [totalElements, setTotalElements] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [selectedApplication, setSelectedApplication] = useState(null);
+    const [editApp, setEditApp] = useState(null);
 
     const loadApplications = async () => {
-        const res = await getPaginatedApplications(page, 7, search, statusFilter);
+        const res = await getPaginatedApplications(page, 5, search, statusFilter);
         setApplications(res.data.content);
         setTotalPages(res.data.totalPages);
         setTotalElements(res.data.totalElements);
         loadStatistics();
     };
+
 
     const [stats, setStats] = useState({
         total: 0,
@@ -40,6 +44,17 @@ function App() {
     useEffect(() => {
         loadStatistics();
     }, []);
+
+    const handleEdit = (app) => {
+        setEditApp(app);
+        setSelectedApplication(app);
+        setShowEditModal(true);
+    };
+
+    const closeModal = () => {
+        setShowEditModal(false);
+        setSelectedApplication(null);
+    };
 
 
     const loadStatistics = async () => {
@@ -107,9 +122,17 @@ function App() {
                         <ApplicationList
                             applications={applications}
                             refresh={loadApplications}
+                            onEdit={handleEdit}
                             // search={search}
                             // statusFilter={statusFilter}
                         />
+                        {showEditModal && (
+                            <EditApplicationModal
+                                application={selectedApplication}
+                                closeModal={closeModal}
+                                refresh={loadApplications}
+                            />
+                        )}
 
                         {/* Pagination Buttons */}
                         <div className="d-flex justify-content-center align-items-center gap-4 mt-4">
