@@ -1,17 +1,18 @@
 import ApplicationItem from "./ApplicationItem";
 
-function ApplicationList({ applications, refresh, search, statusFilter }) {
+//function ApplicationList({ applications, refresh, search, statusFilter }) {
+function ApplicationList({ applications, refresh }) {
 
-    const filteredApps = applications.filter(app => {
-        const nameMatch = app.candidateName
-            .toLowerCase()
-            .includes(search.toLowerCase());
-
-        const statusMatch =
-            statusFilter === "All" || app.status === statusFilter;
-
-        return nameMatch && statusMatch;
-    });
+    // const filteredApps = applications.filter(app => {
+    //     const nameMatch = app.candidateName
+    //         .toLowerCase()
+    //         .includes(search.toLowerCase());
+    //
+    //     const statusMatch =
+    //         statusFilter === "All" || app.status === statusFilter;
+    //
+    //     return nameMatch && statusMatch;
+    // });
 
     return (
         <div className="table-responsive">
@@ -21,19 +22,20 @@ function ApplicationList({ applications, refresh, search, statusFilter }) {
                     <th>Candidate</th>
                     <th>Company</th>
                     <th>Role</th>
+                    <th>Description</th>
                     <th>Status</th>
                     <th width="120">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                {filteredApps.length === 0 ? (
+                {applications.length === 0 ? (
                     <tr>
-                        <td colSpan="5" className="text-center text-muted">
+                        <td colSpan="6" className="text-center text-muted">
                             No matching applications
                         </td>
                     </tr>
                 ) : (
-                    filteredApps.map(app => (
+                    applications.map(app => (
                         <ApplicationItem
                             key={app.id}
                             application={app}

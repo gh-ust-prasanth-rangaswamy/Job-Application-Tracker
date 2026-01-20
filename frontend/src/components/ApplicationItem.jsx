@@ -27,6 +27,7 @@ function ApplicationItem({ application, refresh }) {
             <td>{application.candidateName}</td>
             <td>{application.company}</td>
             <td>{application.role}</td>
+            <td>{application.Description}</td>
             <td>
                 <select
                     className={`form-select border-${statusColor}`}

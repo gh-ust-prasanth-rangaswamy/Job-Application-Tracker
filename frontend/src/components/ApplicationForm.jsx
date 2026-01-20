@@ -6,6 +6,7 @@ function ApplicationForm({ refresh }) {
         candidateName: "",
         company: "",
         role: "",
+        Description: "",
         status: "Applied",
     });
 
@@ -21,6 +22,7 @@ function ApplicationForm({ refresh }) {
             candidateName: "",
             company: "",
             role: "",
+            Description: "",
             status: "Applied",
         });
     };
@@ -56,6 +58,17 @@ function ApplicationForm({ refresh }) {
                     name="role"
                     placeholder="Role"
                     value={form.role}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
+            <div className="col-lg-3 col-md-6 col-12">
+                <input
+                    className="form-control"
+                    name="Description"
+                    placeholder="Description"
+                    value={form.Description}
                     onChange={handleChange}
                     required
                 />

@@ -16,4 +16,5 @@ public class Application {
     private String company;
     private String role;
     private String status;
+    private String Description;
 }
