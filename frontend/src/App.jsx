@@ -6,7 +6,6 @@ import { getPaginatedApplications } from "./services/applicationService";
 import { getStatistics } from "./services/applicationService";
 import EditApplicationModal from "./components/EditApplicationModal";
 
-
 function App() {
     const [applications, setApplications] = useState([]);
     const [search, setSearch] = useState("");
